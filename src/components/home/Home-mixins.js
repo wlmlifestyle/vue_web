@@ -2,7 +2,7 @@ export default {
   data() {
     return {
       menus: [],
-      collapse: true,
+      collapse: false,
       iconlist: ['icon-users', 'icon-tijikongjian', 'icon-shangpin', 'icon-danju', 'icon-baobiao']
     }
   },
