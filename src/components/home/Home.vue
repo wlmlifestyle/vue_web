@@ -10,13 +10,13 @@
     <el-container>
       <el-aside :width="collapse ? '65px':'200px'">
         <div class="toolBar" @click="collapse=!collapse">|||</div>
-        <el-menu :collapse="collapse" :collapse-transition="false" unique-opened router class="el-menu-vertical-demo" background-color="#333744" text-color="#fff" active-text-color="#54a8ff">
+        <el-menu :default-active="activePath" :collapse="collapse" :collapse-transition="false" unique-opened router class="el-menu-vertical-demo" background-color="#333744" text-color="#fff" active-text-color="#54a8ff">
           <el-submenu :index="item.id+''" v-for="(item,i) in menus" :key="item.id" :style="collapse ? 'width:65px':'width:200px'">
             <template slot="title">
               <i :class="['iconfont',iconlist[i]]"></i>
               <span>{{item.authName}}</span>
             </template>
-            <el-menu-item :index="'/'+subitem.path" v-for="subitem in item.children" :key="subitem.id">
+            <el-menu-item @click="saveActivePath('/'+subitem.path)" :index="'/'+subitem.path" v-for="subitem in item.children" :key="subitem.id">
               <i class="el-icon-menu"></i>
               <span slot="title">{{subitem.authName}}</span>
             </el-menu-item>
