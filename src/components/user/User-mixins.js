@@ -46,7 +46,12 @@ export default {
       editFormRules: {
         email: [{ required: true, message: '邮箱不能为空', trigger: 'blur' }],
         mobile: [{ required: true, message: '手机号不能为空', trigger: 'blur' }]
-      }
+      },
+      // 角色对象
+      userInfo: {},
+      setRoleDialogVisible: false,
+      roleList: [],
+      selectorId: ''
     }
   },
   created() {
@@ -140,6 +145,30 @@ export default {
       // console.log(res)
       if (res.meta.status !== 200) return this.$message.error('删除失败')
       this.$message.success('删除成功')
+      this.getUsers()
+    },
+    async setRoles(userInfo) {
+      // console.log(this.selectorId)
+      this.userInfo = userInfo
+      this.setRoleDialogVisible = true
+      // 获取角色列表
+      const { data: res } = await this.$http.get('roles')
+      // console.log(res)
+      if (res.meta.status !== 200) return this.$message.error('获取角色列表失败')
+      this.roleList = res.data
+    },
+    closeSetRole() {
+      this.selectorId = ''
+      this.rolesList = []
+      this.setRoleDialogVisible = false
+    },
+    async setRoleConfirm(id, roleId) {
+      const { data: res } = await this.$http.put(`users/${id}/role`, {
+        rid: roleId
+      })
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      this.$message.success('分配角色成功')
+      this.setRoleDialogVisible = false
       this.getUsers()
     }
   }

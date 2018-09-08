@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>vue_shop</title>
-    <link rel="shortcut icon" href="./static/favicon.ico" type="image/x-icon">
-  </head>
-  <body>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>vue_shop</title>
+  <link rel="shortcut icon" href="./static/favicon.ico" type="image/x-icon">
+  <!-- 使用网络上的NProgress 人家网速快 -->
+  <link href="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="app"></div>
+
+
+  <!-- built files will be auto injected -->
+  <!-- 只要导入了nprogress的js 在window全局 就多了个成员 NProgress -->
+  <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script>
+    NProgress.start();
+    window.onload = function () {
+      NProgress.done();
+    }
+  </script>
+</body>
+
 </html>

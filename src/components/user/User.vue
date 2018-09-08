@@ -41,9 +41,9 @@
         <el-table-column label="操作" width="190px">
           <template slot-scope="scope">
             <el-button size="mini" @click="getUserById(scope.row.id)" type="primary" icon="el-icon-edit"></el-button>
-            <el-button size="mini" @click="delUserById(scope.row.id)"   type="danger" icon="el-icon-delete"></el-button>
+            <el-button size="mini" @click="delUserById(scope.row.id)" type="danger" icon="el-icon-delete"></el-button>
             <el-tooltip :enterable="false" class="item" effect="dark" content="分配角色" placement="top">
-              <el-button size="mini" type="warning" icon="el-icon-setting"></el-button>
+              <el-button size="mini" type="warning" icon="el-icon-setting" @click="setRoles(scope.row)"></el-button>
             </el-tooltip>
 
           </template>
@@ -93,6 +93,24 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="closeEditForm">取 消</el-button>
         <el-button type="primary" @click="updataForm(editForm.id)">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!-- 分配角色的对话框 -->
+    <el-dialog title="分配角色" @close="closeSetRole" :visible.sync="setRoleDialogVisible" width="50%">
+      <div>
+        <p>当前的用户：{{userInfo.username}}</p>
+        <p>当前的角色：{{userInfo.role_name}}</p>
+        <p>分配新角色:
+          <!-- v-model的值为当前被选中的el-option的 value 属性值 -->
+          <el-select v-model="selectorId" placeholder="请选择新角色">
+            <el-option v-for="item in roleList" :key="item.id" :label="item.roleName" :value="item.id">
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible=false">取 消</el-button>
+        <el-button type="primary" @click="setRoleConfirm(userInfo.id,selectorId)">确 定</el-button>
       </span>
     </el-dialog>
 

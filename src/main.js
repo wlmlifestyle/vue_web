@@ -7,17 +7,25 @@ import './assets/fonts/iconfont.css'
 // 这个是全局css 放在最下面 其他css均放在它上面
 import './assets/css/global.css'
 import axios from 'axios'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 // 只要使用axios 发起了ajax请求 必然先调用 通过拦截器指定的回调函数
+// 注册拦截器 一般在created 中只注册一次就可以了 以后只要发起请求就触发了
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
+  // 展示进度条
+  NProgress.start()
+  // 一定要return
   return config
 })
 
 axios.interceptors.response.use(config => {
+  // 隐藏进度条
+  NProgress.done()
   return config
 })
 
