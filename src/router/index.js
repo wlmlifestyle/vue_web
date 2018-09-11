@@ -6,6 +6,12 @@ import Welcome from '@/components/home/Welcome'
 import User from '@/components/user/User'
 import Rights from '@/components/power/Rights'
 import Roles from '@/components/power/Roles'
+import Categories from '@/components/product/Categories'
+import Params from '@/components/product/Params'
+import Order from '@/components/order/Order'
+import Report from '@/components/report/Report'
+import GoodList from '@/components/product/GoodList'
+import AddProduct from '@/components/product/AddProduct'
 Vue.use(Router)
 
 const router = new Router({
@@ -26,7 +32,14 @@ const router = new Router({
         { path: '/welcome', component: Welcome },
         { path: '/users', component: User },
         { path: '/rights', component: Rights },
-        { path: '/roles', component: Roles }
+        { path: '/roles', component: Roles },
+        { path: '/categories', component: Categories },
+        { path: '/params', component: Params },
+        { path: '/orders', component: Order },
+        { path: '/reports', component: Report },
+        { path: '/goods', redirect: '/goods/list' },
+        { path: '/goods/list', component: GoodList },
+        { path: '/goods/add', component: AddProduct }
       ]
     }
   ]

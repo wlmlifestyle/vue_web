@@ -18,3 +18,10 @@ body,
   font-size: 12px;
   margin: 15px 0px;
 }
+.el-step-title {
+  font-size: 12px;
+}
+.ql-container.ql-snow {
+  height: 400px;
+}
+
